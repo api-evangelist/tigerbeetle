@@ -1,0 +1,137 @@
+aid: tigerbeetle
+url: https://raw.githubusercontent.com/api-evangelist/tigerbeetle/refs/heads/main/apis.yml
+name: TigerBeetle
+kind: company
+description: TigerBeetle is an open-source (Apache 2.0) distributed financial
+  accounting and transactions database, purpose-built for high-throughput,
+  mission-critical double-entry bookkeeping and online transaction processing
+  (OLTP). It is NOT an HTTP/REST API and ships no OpenAPI - the database is
+  accessed over a custom binary wire protocol on TCP (default port 3000) via
+  official client libraries for .NET, Go, Java, Node.js, Python, Ruby, and Rust.
+  The "API" is the set of client operations - create_accounts, create_transfers,
+  lookup_accounts, lookup_transfers, get_account_transfers, get_account_balances,
+  query_accounts, and query_transfers - that use fixed-size, cache-line-aligned
+  structs for zero-deserialization performance. TigerBeetle is self-hostable; a
+  fully managed service is also offered to select enterprise partners via
+  sales@tigerbeetle.com.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Accounting
+- Transactions
+- Database
+- Double-Entry
+- Ledger
+- OLTP
+- Distributed
+- Open Source
+- Binary Protocol
+created: '2026-07-02'
+modified: '2026-07-02'
+specificationVersion: '0.19'
+apis:
+- aid: tigerbeetle:tigerbeetle-accounts-api
+  name: TigerBeetle Accounts API
+  tags:
+  - Accounts
+  - Ledger
+  - Double-Entry
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.tigerbeetle.com/reference/account/
+  description: Client-library operations for managing 128-byte double-entry
+    accounts - create_accounts (establish immutable accounts on a ledger with
+    debit/credit constraint flags), lookup_accounts (fetch accounts by 128-bit
+    id), and query_accounts (filter accounts by ledger, code, and user_data).
+    Accounts carry pending and posted debit/credit balances. These are binary
+    wire-protocol operations invoked through the official clients, not HTTP
+    endpoints; there is no REST baseURL or OpenAPI.
+  properties:
+  - url: https://docs.tigerbeetle.com/reference/account/
+    type: Documentation
+  - url: https://docs.tigerbeetle.com/reference/requests/create_accounts/
+    type: APIReference
+  - url: https://docs.tigerbeetle.com/reference/requests/lookup_accounts/
+    type: APIReference
+  - url: https://docs.tigerbeetle.com/reference/requests/query_accounts/
+    type: APIReference
+- aid: tigerbeetle:tigerbeetle-transfers-api
+  name: TigerBeetle Transfers API
+  tags:
+  - Transfers
+  - Two-Phase
+  - Pending
+  - Double-Entry
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.tigerbeetle.com/reference/transfer/
+  description: Client-library operations for moving funds between accounts as
+    immutable 128-byte double-entry transfers - create_transfers (single-phase,
+    plus two-phase pending / post-pending / void-pending transfers, linked
+    transfers, balancing transfers, and timeouts), lookup_transfers (fetch by
+    128-bit id), and query_transfers (filter by ledger, code, and user_data).
+    Delivered over the binary TCP wire protocol via the official clients - no
+    REST endpoints, no OpenAPI.
+  properties:
+  - url: https://docs.tigerbeetle.com/reference/transfer/
+    type: Documentation
+  - url: https://docs.tigerbeetle.com/reference/requests/create_transfers/
+    type: APIReference
+  - url: https://docs.tigerbeetle.com/reference/requests/lookup_transfers/
+    type: APIReference
+  - url: https://docs.tigerbeetle.com/reference/requests/query_transfers/
+    type: APIReference
+- aid: tigerbeetle:tigerbeetle-account-balances-api
+  name: TigerBeetle Account Balances API
+  tags:
+  - Balances
+  - History
+  - Ledger
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.tigerbeetle.com/reference/account-balance/
+  description: The get_account_balances operation returns the historical
+    balances of an account over time (for accounts created with the history
+    flag), each a point-in-time AccountBalance record of pending and posted
+    debits and credits. A binary wire-protocol operation invoked through the
+    official client libraries, not an HTTP endpoint.
+  properties:
+  - url: https://docs.tigerbeetle.com/reference/account-balance/
+    type: Documentation
+  - url: https://docs.tigerbeetle.com/reference/requests/get_account_balances/
+    type: APIReference
+- aid: tigerbeetle:tigerbeetle-account-filter-queries-api
+  name: TigerBeetle Account Filter Queries API
+  tags:
+  - Queries
+  - Filters
+  - Transfers
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.tigerbeetle.com/reference/account-filter/
+  description: Query surface for retrieving the transfers and balances tied to a
+    single account. The get_account_transfers operation takes an AccountFilter
+    (account_id, timestamp range, limit, direction, and flags) to page through
+    an account's transfers, and the same filter drives get_account_balances.
+    QueryFilter powers the broader query_accounts / query_transfers searches.
+    Binary wire-protocol operations via the official clients - no REST, no
+    OpenAPI.
+  properties:
+  - url: https://docs.tigerbeetle.com/reference/account-filter/
+    type: Documentation
+  - url: https://docs.tigerbeetle.com/reference/query-filter/
+    type: Documentation
+  - url: https://docs.tigerbeetle.com/reference/requests/get_account_transfers/
+    type: APIReference
+common:
+- type: GitHubOrganization
+  url: https://github.com/tigerbeetle
+- type: LinkedIn
+  url: https://www.linkedin.com/company/tigerbeetle
+- type: Website
+  url: https://tigerbeetle.com/
+- type: Documentation
+  url: https://docs.tigerbeetle.com/
+- type: Plans
+  url: plans/tigerbeetle-plans-pricing.yml
+- type: FinOps
+  url: finops/tigerbeetle-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

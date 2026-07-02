@@ -1,0 +1,91 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: TigerBeetle
+providerId: tigerbeetle
+created: '2026-07-02'
+modified: '2026-07-02'
+reconciled: false
+tags:
+- Financial
+- Accounting
+- Transactions
+- Database
+- Open Source
+- Plans
+description: >-
+  TigerBeetle has two consumption models. The database itself is open source
+  (Apache 2.0, no CLAs) and free to self-host as a replicated cluster on your
+  own infrastructure - there is no license fee and no per-operation charge; cost
+  is your own compute, storage, and network. TigerBeetle also offers a fully
+  managed service (cross-cloud deployments with automated disaster recovery and
+  24/7 monitoring) plus enterprise support, currently offered to select partners
+  and engaged by contacting sales@tigerbeetle.com. There is no published,
+  self-service, per-unit price for the managed service, and there is no HTTP/API
+  metering because access is via the binary-protocol client libraries rather
+  than billed HTTP calls.
+notes: >-
+  No public pricing table exists for the managed/enterprise service as of the
+  review date; it is contact-sales. A startup program is referenced. Verify
+  current terms directly with TigerBeetle during reconciliation.
+sources:
+- https://tigerbeetle.com/
+- https://docs.tigerbeetle.com/
+- https://docs.tigerbeetle.com/operating/deploying/managed-service/
+- https://github.com/tigerbeetle/tigerbeetle
+plans:
+- id: tigerbeetle-open-source
+  name: Open Source (Self-Hosted)
+  type: free
+  description: >-
+    The full TigerBeetle financial transactions database, Apache 2.0 licensed
+    and self-hostable in production as a replicated cluster on Linux. Includes
+    all client libraries (.NET, Go, Java, Node.js, Python, Ruby, Rust) and all
+    operations (accounts, single-phase and two-phase transfers, balances,
+    queries). No license fee and no per-operation charge; throughput is bounded
+    only by your own hardware.
+  entries:
+  - label: Self-Hosted Operations
+    name: self_hosted_operations
+    type: usage
+    metric: operations
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (self-hosted; you provide infrastructure)
+    userMultiplied: false
+  elements:
+  - name: All Client Libraries
+  - name: Accounts and Transfers
+  - name: Two-Phase / Pending Transfers
+  - name: Account Balances and Queries
+  - name: Replicated Cluster
+- id: tigerbeetle-managed-enterprise
+  name: Managed Service / Enterprise
+  type: enterprise
+  description: >-
+    Fully managed TigerBeetle - cross-cloud deployments with automated disaster
+    recovery, proactive 24/7 monitoring, and dedicated senior-engineer support
+    across design, proof-of-concept, production, and scaling. Offered to select
+    enterprise partners; pricing is negotiated. Contact sales@tigerbeetle.com.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (sales@tigerbeetle.com)
+    userMultiplied: false
+  elements:
+  - name: Fully Managed Hosting
+  - name: Cross-Cloud Deployment
+  - name: Automated Disaster Recovery
+  - name: 24/7 Monitoring and Support
+  - name: Dedicated Engineering
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

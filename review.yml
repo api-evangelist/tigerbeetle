@@ -1,0 +1,115 @@
+aid: tigerbeetle
+name: TigerBeetle
+review:
+  question: Does TigerBeetle expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-02'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. TigerBeetle has no HTTP, SSE, or
+    WebSocket surface to model. Clients communicate with the cluster over a
+    custom binary request/response protocol on TCP; there is no publish/
+    subscribe or server-push event stream on TigerBeetle's own protocol to
+    describe with AsyncAPI.
+findings:
+  summary: |
+    TigerBeetle does not publish a documented public WebSocket API - and, more
+    fundamentally, it does not expose an HTTP/REST API at all. TigerBeetle is an
+    open-source (Apache 2.0) distributed financial accounting / transactions
+    database. Applications talk to a TigerBeetle cluster over a custom binary
+    wire protocol carried on TCP (default port 3000), using official client
+    libraries for .NET, Go, Java, Node.js, Python, Ruby, and Rust. The protocol
+    uses fixed-size, cache-line-aligned structs (128-byte Account and Transfer
+    records) sent in batches for zero-deserialization, high-throughput
+    processing, with a client/cluster session ("ping-pong") registration and
+    eviction mechanism. The "API" is therefore a set of client operations, not
+    URL endpoints: create_accounts, create_transfers, lookup_accounts,
+    lookup_transfers, get_account_transfers, get_account_balances,
+    query_accounts, and query_transfers. There is no REST endpoint, no OpenAPI
+    definition, no Server-Sent Events stream, and no WebSocket (ws:// or wss://)
+    endpoint documented anywhere in TigerBeetle's reference.
+  openSource: |
+    TigerBeetle is open source under the Apache 2.0 license (no CLAs) at
+    github.com/tigerbeetle/tigerbeetle and is self-hostable in production on
+    Linux as a replicated cluster. A fully managed service (cross-cloud
+    deployments with automated disaster recovery and 24/7 monitoring) is offered
+    to select enterprise partners; it is engaged by contacting
+    sales@tigerbeetle.com and has no published self-service pricing.
+  transports:
+    - protocol: Binary/TCP
+      scheme: tcp
+      port: 3000
+      documented: true
+      note: >-
+        Custom binary request/response wire protocol between client and cluster
+        over TCP (default port 3000). Fixed-size, cache-line-aligned structs,
+        batched, zero-deserialization. Accessed only via the official client
+        libraries. Not HTTP.
+    - protocol: REST
+      scheme: https
+      documented: false
+      note: >-
+        TigerBeetle exposes no HTTP/REST API and ships no OpenAPI definition.
+        All access is through the binary-protocol client libraries.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No HTTP Server-Sent Events stream exists; there is no HTTP surface.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: >-
+        No WebSocket endpoint is documented anywhere in TigerBeetle's reference,
+        client docs, or operating guides as of the review date. Communication is
+        a custom binary protocol on raw TCP, not WebSocket.
+  clientOperations:
+    - create_accounts
+    - lookup_accounts
+    - query_accounts
+    - create_transfers
+    - lookup_transfers
+    - query_transfers
+    - get_account_transfers
+    - get_account_balances
+  clientLanguages:
+    - .NET
+    - Go
+    - Java
+    - Node.js
+    - Python
+    - Ruby
+    - Rust
+sources:
+  - url: https://docs.tigerbeetle.com/reference/requests/
+    type: APIReference
+    note: Lists the client request/operation types; these are binary-protocol operations, not HTTP endpoints.
+  - url: https://docs.tigerbeetle.com/reference/account/
+    type: Documentation
+    note: 128-byte Account data type used by create_accounts / lookup_accounts / query_accounts.
+  - url: https://docs.tigerbeetle.com/reference/transfer/
+    type: Documentation
+    note: 128-byte Transfer data type, including two-phase pending/post-pending/void-pending and linked transfers.
+  - url: https://docs.tigerbeetle.com/reference/account-filter/
+    type: Documentation
+    note: AccountFilter driving get_account_transfers and get_account_balances.
+  - url: https://docs.tigerbeetle.com/coding/clients/
+    type: Documentation
+    note: Official client libraries (.NET, Go, Java, Node.js, Python, Ruby, Rust); no HTTP gateway.
+  - url: https://docs.tigerbeetle.com/operating/deploying/managed-service/
+    type: Documentation
+    note: Fully managed service via sales@tigerbeetle.com; no public pricing.
+  - url: https://github.com/tigerbeetle/tigerbeetle
+    type: SourceCode
+    note: Open-source (Apache 2.0) financial transactions database; custom binary protocol over TCP.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket - and no HTTP - protocol surface exists. TigerBeetle's public
+    API is a custom binary request/response protocol on TCP, accessed solely
+    through official client SDKs. No OpenAPI, AsyncAPI, Postman, or collection
+    artifacts were created because there is no HTTP/REST/SSE/WebSocket surface
+    to model; the apis.yml documents the logical operation groups (Accounts,
+    Transfers, Account Balances, Account Filter Queries) with links to the real
+    binary-protocol reference documentation instead.

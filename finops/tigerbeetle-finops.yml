@@ -1,0 +1,95 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: TigerBeetle
+providerId: tigerbeetle
+created: '2026-07-02'
+modified: '2026-07-02'
+reconciled: false
+tags:
+- Financial
+- Accounting
+- Transactions
+- Database
+- Open Source
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of TigerBeetle spend. TigerBeetle's database is open source
+  (Apache 2.0) and free to self-host - in that model there is no vendor invoice
+  and no per-operation charge; the cost is entirely your own compute, storage,
+  and network for running the replicated cluster and the client applications
+  that talk to it over the binary TCP protocol. TigerBeetle also offers a fully
+  managed / enterprise service (cross-cloud deployments, disaster recovery,
+  24/7 support) that is contact-sales with negotiated pricing rather than a
+  metered, published rate card. Because access is via the binary-protocol client
+  libraries, there is no billed-HTTP-request meter to allocate.
+notes: >-
+  Managed/enterprise per-unit rates are not public and not reconciled here;
+  verify with sales@tigerbeetle.com. For self-hosted deployments the dominant
+  costs are infrastructure (the TigerBeetle cluster nodes and their disks/
+  network) rather than any TigerBeetle license or usage fee.
+sources:
+- https://tigerbeetle.com/
+- https://docs.tigerbeetle.com/
+- https://docs.tigerbeetle.com/operating/deploying/managed-service/
+- https://github.com/tigerbeetle/tigerbeetle
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: TigerBeetle
+serviceCategory: Databases
+billingModel:
+  pricingCategory: Open Source / Contract
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: TigerBeetle
+  ServiceCategory: Databases
+  ProviderName: TigerBeetle
+  PublisherName: TigerBeetle
+  InvoiceIssuerName: TigerBeetle
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Contract
+meters:
+- name: self_hosted_compute
+  description: Infrastructure cost of running the self-hosted TigerBeetle cluster nodes (no TigerBeetle invoice).
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - deployment
+  - cluster
+- name: self_hosted_storage
+  description: Disk storage consumed by the cluster's data files and replicas (no TigerBeetle invoice).
+  unit: bytes
+  aggregation: sum
+  dimensions:
+  - deployment
+  - cluster
+- name: managed_service_contract
+  description: Negotiated fee for the fully managed / enterprise service; contact-sales, not publicly metered.
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: On self-hosted, monitor cluster node compute, disk, and network as the true cost; there is no vendor usage bill to track. On managed, track the negotiated contract.
+- name: Allocation
+  description: Attribute cluster infrastructure cost to the workloads/ledgers it serves; TigerBeetle's ledger and code fields on accounts can map internal cost centers.
+- name: Optimization
+  description: Batch operations to exploit TigerBeetle's high per-node throughput and right-size the cluster; a single small cluster can absorb very high transaction volume, avoiding overprovisioning.
+- name: Accountability
+  description: Assign an owner for the cluster's infrastructure budget (self-hosted) or the managed-service contract; review capacity against transaction growth.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
