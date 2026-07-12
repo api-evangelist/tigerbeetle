@@ -120,6 +120,8 @@ apis:
   - url: https://docs.tigerbeetle.com/reference/requests/get_account_transfers/
     type: APIReference
 common:
+- type: DomainSecurity
+  url: security/tigerbeetle-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/tigerbeetle
 - type: LinkedIn
@@ -132,6 +134,8 @@ common:
   url: plans/tigerbeetle-plans-pricing.yml
 - type: FinOps
   url: finops/tigerbeetle-finops.yml
+- url: https://tigerbeetle.com/blog/atom.xml
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
