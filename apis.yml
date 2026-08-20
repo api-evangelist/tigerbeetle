@@ -30,6 +30,17 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tigerbeetl
 tags:
 - Financial
 - Accounting
+- Transaction
+- Database
+- Double-Entry
+- Ledger
+- OLTP
+- Distributed
+- Open-Source
+- Binary Protocol
+tags_raw:
+- Financial
+- Accounting
 - Transactions
 - Database
 - Double-Entry
@@ -45,6 +56,10 @@ apis:
 - aid: tigerbeetle:tigerbeetle-accounts-api
   name: TigerBeetle Accounts API
   tags:
+  - Account
+  - Ledger
+  - Double-Entry
+  tags_raw:
   - Accounts
   - Ledger
   - Double-Entry
@@ -112,6 +127,10 @@ apis:
 - aid: tigerbeetle:tigerbeetle-account-filter-queries-api
   name: TigerBeetle Account Filter Queries API
   tags:
+  - Query
+  - Filters
+  - Transfers
+  tags_raw:
   - Queries
   - Filters
   - Transfers
