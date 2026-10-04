@@ -39,7 +39,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tigerbeetle.png
 tags:
-- Financial
+- Finance
 - Accounting
 - Transaction
 - Database
@@ -47,7 +47,7 @@ tags:
 - Ledger
 - OLTP
 - Distributed
-- Open-Source
+- Open Source
 - Binary Protocol
 tags_raw:
 - Financial
@@ -60,6 +60,7 @@ tags_raw:
 - Distributed
 - Open Source
 - Binary Protocol
+- Open-Source
 created: '2026-07-02'
 modified: '2026-07-02'
 specificationVersion: '0.23'
