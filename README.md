@@ -1,4 +1,4 @@
-# TigerBeetle (tigerbeetle)
+# TigerBeetle
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,123 +64,101 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-TigerBeetle is an open-source (Apache 2.0) distributed financial accounting and transactions database, purpose-built for high-throughput, mission-critical double-entry bookkeeping and online transaction processing (OLTP). It is **not** an HTTP/REST API and ships **no OpenAPI** definition. Applications talk to a TigerBeetle cluster over a **custom binary wire protocol on TCP (default port 3000)** using official client libraries for .NET, Go, Java, Node.js, Python, Ruby, and Rust. Accounts and transfers are fixed-size, cache-line-aligned 128-byte structs sent in batches for zero-deserialization performance. TigerBeetle is self-hostable as a replicated cluster; a fully managed enterprise service is also offered via `sales@tigerbeetle.com`.
+TigerBeetle is an open-source (Apache 2.0) distributed financial accounting and transactions database, purpose-built for high-throughput, mission-critical double-entry bookkeeping and online transaction processing (OLTP). It is NOT an HTTP/REST API and ships no OpenAPI - the database is accessed over a custom binary wire protocol on TCP (default port 3000) via official client libraries for .NET, Go, Java, Node.js, Python, Ruby, and Rust. The "API" is the set of client operations - create_accounts, create_transfers, lookup_accounts, lookup_transfers, get_account_transfers, get_account_balances, query_accounts, and query_transfers - that use fixed-size, cache-line-aligned structs for zero-deserialization performance. TigerBeetle is self-hostable; a fully managed service is also offered to select enterprise partners via sales@tigerbeetle.com.
 
-The "API" documented here is therefore a set of **client operations**, not URL endpoints: `create_accounts`, `create_transfers`, `lookup_accounts`, `lookup_transfers`, `get_account_transfers`, `get_account_balances`, `query_accounts`, and `query_transfers`. There are no REST base URLs, no OpenAPI/AsyncAPI files, and no WebSocket surface - none exist to model honestly.
+**Areas:** Finance · Accounting · Transaction · Database · Double-Entry · Ledger · OLTP · Distributed · Open Source · Binary Protocol
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/tigerbeetle/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/tigerbeetle/refs/heads/main/apis.yml)
+## TigerBeetle on APIs.io
 
-## Tags
+Everything profiled for TigerBeetle is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tigerbeetle/](https://apis.io/providers/tigerbeetle/)** — or go straight to one of the APIs or properties below.
 
-- Financial
-- Accounting
-- Transactions
-- Database
-- Double-Entry
-- Ledger
-- OLTP
-- Distributed
-- Open Source
-- Binary Protocol
+### APIs (4)
 
-## Timestamps
+- [TigerBeetle Accounts API](https://apis.io/apis/tigerbeetle/tigerbeetle-accounts-api/) — Client-library operations for managing 128-byte double-entry accounts - create_accounts (establish immutable accounts on a ledger with debit/credit…
+- [TigerBeetle Transfers API](https://apis.io/apis/tigerbeetle/tigerbeetle-transfers-api/) — Client-library operations for moving funds between accounts as immutable 128-byte double-entry transfers - create_transfers (single-phase, plus two-phase…
+- [TigerBeetle Account Balances API](https://apis.io/apis/tigerbeetle/tigerbeetle-account-balances-api/) — The get_account_balances operation returns the historical balances of an account over time (for accounts created with the history flag), each a…
+- [TigerBeetle Account Filter Queries API](https://apis.io/apis/tigerbeetle/tigerbeetle-account-filter-queries-api/) — Query surface for retrieving the transfers and balances tied to a single account. The get_account_transfers operation takes an AccountFilter (account_id,…
 
-- **Created:** 2026-07-02
-- **Modified:** 2026-07-02
+### Published properties
 
-## Access Model
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Transport:** Custom binary request/response wire protocol over TCP (default port 3000). Not HTTP, not WebSocket.
-- **Clients:** Official libraries for .NET, Go, Java, Node.js, Python, Ruby, and Rust connect to a cluster and register a session.
-- **Data types:** 128-byte `Account` and 128-byte `Transfer` records, batched for throughput and zero deserialization.
-- **No HTTP gateway:** There is no REST endpoint, OpenAPI, SSE, or WebSocket surface to describe.
+#### Security (1)
 
-## APIs
+Authentication, trust centre, and vulnerability disclosure.
 
-### TigerBeetle Accounts API
+- [Tigerbeetle Domain Security](https://apis.io/security/tigerbeetle/tigerbeetle-domain-security/)
 
-Client-library operations for managing 128-byte double-entry accounts - `create_accounts` (establish immutable accounts on a ledger with debit/credit constraint flags), `lookup_accounts` (fetch by 128-bit id), and `query_accounts` (filter by ledger, code, and user_data). Binary wire-protocol operations, not HTTP endpoints.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://docs.tigerbeetle.com/reference/account/](https://docs.tigerbeetle.com/reference/account/)
+Published plans, tiers and prices.
 
-#### Tags
+- [Tigerbeetle Plans Pricing](https://apis.io/plans/tigerbeetle/tigerbeetle-plans-pricing/)
 
-- Accounts
-- Ledger
-- Double-Entry
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.tigerbeetle.com/reference/account/)
-- [API Reference — create_accounts](https://docs.tigerbeetle.com/reference/requests/create_accounts/)
-- [API Reference — lookup_accounts](https://docs.tigerbeetle.com/reference/requests/lookup_accounts/)
-- [API Reference — query_accounts](https://docs.tigerbeetle.com/reference/requests/query_accounts/)
+- [Tigerbeetle Finops](https://apis.io/finops/tigerbeetle/tigerbeetle-finops/)
 
-### TigerBeetle Transfers API
+## Where to find this API
 
-Client-library operations for moving funds between accounts as immutable 128-byte double-entry transfers - `create_transfers` (single-phase plus two-phase pending / post-pending / void-pending transfers, linked transfers, balancing transfers, and timeouts), `lookup_transfers`, and `query_transfers`. Delivered over the binary TCP wire protocol via the official clients.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.tigerbeetle.com/reference/transfer/](https://docs.tigerbeetle.com/reference/transfer/)
-
-#### Tags
-
-- Transfers
-- Two-Phase
-- Pending
-- Double-Entry
-
-#### Properties
-
-- [Documentation](https://docs.tigerbeetle.com/reference/transfer/)
-- [API Reference — create_transfers](https://docs.tigerbeetle.com/reference/requests/create_transfers/)
-- [API Reference — lookup_transfers](https://docs.tigerbeetle.com/reference/requests/lookup_transfers/)
-- [API Reference — query_transfers](https://docs.tigerbeetle.com/reference/requests/query_transfers/)
-
-### TigerBeetle Account Balances API
-
-The `get_account_balances` operation returns the historical balances of an account over time (for accounts created with the `history` flag), each a point-in-time `AccountBalance` record of pending and posted debits and credits. A binary wire-protocol operation via the official clients.
-
-- **Human URL:** [https://docs.tigerbeetle.com/reference/account-balance/](https://docs.tigerbeetle.com/reference/account-balance/)
-
-#### Tags
-
-- Balances
-- History
-- Ledger
-
-#### Properties
-
-- [Documentation](https://docs.tigerbeetle.com/reference/account-balance/)
-- [API Reference — get_account_balances](https://docs.tigerbeetle.com/reference/requests/get_account_balances/)
-
-### TigerBeetle Account Filter Queries API
-
-Query surface for retrieving the transfers and balances tied to a single account. `get_account_transfers` takes an `AccountFilter` (account_id, timestamp range, limit, direction, flags) to page through an account's transfers, and the same filter drives `get_account_balances`. `QueryFilter` powers the broader `query_accounts` / `query_transfers` searches. Binary wire-protocol operations via the official clients.
-
-- **Human URL:** [https://docs.tigerbeetle.com/reference/account-filter/](https://docs.tigerbeetle.com/reference/account-filter/)
-
-#### Tags
-
-- Queries
-- Filters
-- Transfers
-
-#### Properties
-
-- [Documentation — AccountFilter](https://docs.tigerbeetle.com/reference/account-filter/)
-- [Documentation — QueryFilter](https://docs.tigerbeetle.com/reference/query-filter/)
-- [API Reference — get_account_transfers](https://docs.tigerbeetle.com/reference/requests/get_account_transfers/)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/tigerbeetle)
-- [LinkedIn](https://www.linkedin.com/company/tigerbeetle)
 - [Website](https://tigerbeetle.com/)
 - [Documentation](https://docs.tigerbeetle.com/)
-- [Plans](plans/tigerbeetle-plans-pricing.yml)
-- [Fin Ops](finops/tigerbeetle-finops.yml)
+- [Blog](https://tigerbeetle.com/blog/atom.xml)
+- [GitHub](https://github.com/tigerbeetle)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 10.1** — minimal · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 5.3 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tigerbeetle/](https://apis.io/providers/tigerbeetle/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for TigerBeetle: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tigerbeetle/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
